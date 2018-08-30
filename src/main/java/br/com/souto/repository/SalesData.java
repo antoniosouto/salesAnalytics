@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import br.com.souto.analytics.ClientRegisters;
+import br.com.souto.analytics.Registers;
+import br.com.souto.analytics.SalesManRegisters;
+import br.com.souto.analytics.SalesRegisters;
 import br.com.souto.model.ClientRegistry;
 import br.com.souto.model.ItemSale;
 import br.com.souto.model.Registry;
@@ -18,6 +22,17 @@ import br.com.souto.model.SalesManRegistry;
 import br.com.souto.model.SalesRegistry;
 
 public class SalesData {
+	
+		public List<Registers> getRegistersContainers() throws IOException {
+			
+			List<Registers> registersContaiersList = new ArrayList<Registers>();
+			
+			for (List<Registry> value: getRegisters().values()) {
+				
+				
+			}
+			
+		}
 
 		public Map<RegistersIds, List<Registry>> getRegisters() throws IOException {
 			String fileName = "lines.txt";
@@ -40,7 +55,7 @@ public class SalesData {
 		}
 		
 		private static Registry createRegistry(String line) {
-			String [] tokens = line.split("ç");
+			String [] tokens = line.split("ï¿½");
 			if (tokens[0].equals(RegistersIds.SALESMAN.id())) {
 				return new SalesManRegistry(tokens[1], tokens[2], tokens[3]);
 			} else if (tokens[0].equals(RegistersIds.CLIENT.id())) {
@@ -48,7 +63,7 @@ public class SalesData {
 			} else if (tokens[0].equals(RegistersIds.ITEMSALE.id())) {
 				return createSalesRegistry(tokens[1], tokens[2], tokens[3]);
 			} else {
-				throw new IllegalArgumentException("id inválido na linha: " + line);
+				throw new IllegalArgumentException("Invalid Id on line: " + line);
 			}
 		}
 		
@@ -65,6 +80,20 @@ public class SalesData {
 			}
 			
 			return new SalesRegistry(saleId, itemSales, salesManName);
+		}
+		
+		private static Registers createRegistersContainers(List<Registry> registersList) {
+			switch(registersList.get(0).getId()) {
+			case SALESMAN:
+				return new SalesManRegisters();
+			case CLIENT:
+				return new ClientRegisters();
+			case ITEMSALE:
+				return new SalesRegisters();
+			default:
+				throw new IllegalStateException("Invalid State.");
+					
+			}
 		}
 
 }
