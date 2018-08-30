@@ -2,10 +2,12 @@ package br.com.souto.model;
 
 import java.util.List;
 
+import br.com.souto.repository.RegistersIds;
+
 public class SalesRegistry extends Registry{
 	
 	public SalesRegistry(String saleId, List<ItemSale> itemsList, String salesManName) {
-		this.id = "103";
+		this.id = RegistersIds.ITEMSALE;
 		this.saleId = saleId;
 		this.ItemsList = itemsList;
 		this.salesManName = salesManName;
@@ -32,6 +34,10 @@ public class SalesRegistry extends Registry{
 	}
 	public void setSalesManName(String salesManName) {
 		this.salesManName = salesManName;
+	}
+	@Override
+	public String toString() {
+		return "SalesRegistry [saleId=" + saleId + ", ItemsList=" + ItemsList + ", salesManName=" + salesManName + "]";
 	}
 
 }

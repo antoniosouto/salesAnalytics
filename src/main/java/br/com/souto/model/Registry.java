@@ -1,14 +1,16 @@
 package br.com.souto.model;
 
+import br.com.souto.repository.RegistersIds;
+
 public class Registry {
 	
-	protected String id;
+	protected RegistersIds id;
 
-	protected String getId() {
+	public RegistersIds getId() {
 		return id;
 	}
 
-	protected void setId(String id) {
+	public void setId(RegistersIds id) {
 		this.id = id;
 	}
 

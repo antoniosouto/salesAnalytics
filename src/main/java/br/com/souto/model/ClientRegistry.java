@@ -1,9 +1,11 @@
 package br.com.souto.model;
 
+import br.com.souto.repository.RegistersIds;
+
 public class ClientRegistry extends Registry {
 	
 	public ClientRegistry(String cnpj, String name, String businessArea) {
-		this.id = "002";
+		this.id = RegistersIds.CLIENT;
 		this.cnpj = cnpj;
 		this.name = name;
 		this.businessArea = businessArea;
@@ -30,6 +32,10 @@ public class ClientRegistry extends Registry {
 	}
 	public void setBusinessArea(String businessArea) {
 		this.businessArea = businessArea;
+	}
+	@Override
+	public String toString() {
+		return "ClientRegistry [cnpj=" + cnpj + ", name=" + name + ", businessArea=" + businessArea + "]";
 	}
 
 }

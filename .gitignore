@@ -1,3 +1,10 @@
+.classpath
+.gradle/
+.project
+.settings/
+bin/
+build/
+
  Created by https://www.gitignore.io/api/java,gradle,eclipse
 
  ### Eclipse ###
