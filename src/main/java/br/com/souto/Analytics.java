@@ -10,8 +10,8 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import br.com.souto.analytics.SalesAnalysis;
-import br.com.souto.container.RegistersContainer;
 import br.com.souto.files.SalesFiles;
+import br.com.souto.processor.RegistersProcessor;
 import br.com.souto.repository.Repository;
 import br.com.souto.repository.SalesData;
 import java.nio.file.Path;
@@ -35,7 +35,7 @@ public class Analytics {
 							logger.info("Processing file " + path.toString());
 								
 							List<String> registerLinesList = Repository.getRegisterLinesList(path);
-							List<RegistersContainer> registersContainersList =
+							List<RegistersProcessor> registersContainersList =
 									new SalesData().getRegistersContainers(registerLinesList);
 							
 							logger.fine(registersContainersList.toString());

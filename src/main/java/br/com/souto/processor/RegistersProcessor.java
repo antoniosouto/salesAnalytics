@@ -1,12 +1,12 @@
-package br.com.souto.container;
+package br.com.souto.processor;
 
 import java.util.List;
 
 import br.com.souto.registry.Registry;
 
-public abstract class RegistersContainer {
+public abstract class RegistersProcessor {
 	
-	public <T> RegistersContainer(List<Registry> registersList) {
+	public <T> RegistersProcessor(List<Registry> registersList) {
 		this.registersList = registersList;
 	}
 

@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.com.souto.container.ClientRegistersContainer;
-import br.com.souto.container.RegistersContainer;
-import br.com.souto.container.SalesManRegistersContainer;
-import br.com.souto.container.SalesRegistersContainer;
+import br.com.souto.processor.ClientRegistersProcessor;
+import br.com.souto.processor.RegistersProcessor;
+import br.com.souto.processor.SalesManRegistersProcessor;
+import br.com.souto.processor.SalesRegistersProcessor;
 import br.com.souto.registry.ClientRegistry;
 import br.com.souto.registry.ItemSale;
 import br.com.souto.registry.Registry;
@@ -17,9 +17,9 @@ import br.com.souto.registry.SalesRegistry;
 
 public class SalesData {
 	
-		public List<RegistersContainer> getRegistersContainers(List<String> registerLinesList) {
+		public List<RegistersProcessor> getRegistersContainers(List<String> registerLinesList) {
 			
-			List<RegistersContainer> registersContainersList = new ArrayList<RegistersContainer>();
+			List<RegistersProcessor> registersContainersList = new ArrayList<RegistersProcessor>();
 			
 			for (List<Registry> registersList: getRegisters(registerLinesList).values()) {
 				registersContainersList.add(createRegistersContainers(registersList));
@@ -29,14 +29,14 @@ public class SalesData {
 			
 		}
 		
-		private static RegistersContainer createRegistersContainers(List<Registry> registersList) {
+		private static RegistersProcessor createRegistersContainers(List<Registry> registersList) {
 			switch(registersList.get(0).getId()) {
 			case SALESMAN:
-				return new SalesManRegistersContainer(registersList);
+				return new SalesManRegistersProcessor(registersList);
 			case CLIENT:
-				return new ClientRegistersContainer(registersList);
+				return new ClientRegistersProcessor(registersList);
 			case ITEMSALE:
-				return new SalesRegistersContainer(registersList);
+				return new SalesRegistersProcessor(registersList);
 			default:
 				throw new IllegalStateException("Invalid State.");
 					

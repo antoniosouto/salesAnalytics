@@ -1,12 +1,12 @@
-package br.com.souto.container;
+package br.com.souto.processor;
 
 import java.util.List;
 
 import br.com.souto.registry.Registry;
 
-public class ClientRegistersContainer extends RegistersContainer{
+public class ClientRegistersProcessor extends RegistersProcessor{
 	
-	public ClientRegistersContainer(List<Registry> registersList) {
+	public ClientRegistersProcessor(List<Registry> registersList) {
 		super(registersList);
 	}
 

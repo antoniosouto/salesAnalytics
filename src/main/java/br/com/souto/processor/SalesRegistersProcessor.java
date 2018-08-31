@@ -1,4 +1,4 @@
-package br.com.souto.container;
+package br.com.souto.processor;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import br.com.souto.registry.ItemSale;
 import br.com.souto.registry.Registry;
 import br.com.souto.registry.SalesRegistry;
 
-public class SalesRegistersContainer extends RegistersContainer{
+public class SalesRegistersProcessor extends RegistersProcessor{
 	
-	public SalesRegistersContainer(List<Registry> registersList) {
+	public SalesRegistersProcessor(List<Registry> registersList) {
 		super(registersList);
 	}
 
