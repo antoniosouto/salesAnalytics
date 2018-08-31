@@ -35,12 +35,12 @@ public class Analytics {
 							logger.info("Processing file " + path.toString());
 								
 							List<String> registerLinesList = Repository.getRegisterLinesList(path);
-							List<RegistersProcessor> registersContainersList =
-									new SalesData().getRegistersContainers(registerLinesList);
+							List<RegistersProcessor> registersProcessorsList =
+									new SalesData().getRegistersProcessors(registerLinesList);
 							
-							logger.fine(registersContainersList.toString());
+							logger.fine(registersProcessorsList.toString());
 							
-							String report = new SalesAnalysis().process(registersContainersList);
+							String report = new SalesAnalysis().process(registersProcessorsList);
 							
 							Repository.saveReport(report, SalesFiles.getOutputFilePath(path));
 								

@@ -17,19 +17,19 @@ import br.com.souto.registry.SalesRegistry;
 
 public class SalesData {
 	
-		public List<RegistersProcessor> getRegistersContainers(List<String> registerLinesList) {
+		public List<RegistersProcessor> getRegistersProcessors(List<String> registerLinesList) {
 			
-			List<RegistersProcessor> registersContainersList = new ArrayList<RegistersProcessor>();
+			List<RegistersProcessor> registersProcessorsList = new ArrayList<RegistersProcessor>();
 			
 			for (List<Registry> registersList: getRegisters(registerLinesList).values()) {
-				registersContainersList.add(createRegistersContainers(registersList));
+				registersProcessorsList.add(createRegistersProcessors(registersList));
 			}
 			
-			return registersContainersList;
+			return registersProcessorsList;
 			
 		}
 		
-		private static RegistersProcessor createRegistersContainers(List<Registry> registersList) {
+		private static RegistersProcessor createRegistersProcessors(List<Registry> registersList) {
 			switch(registersList.get(0).getId()) {
 			case SALESMAN:
 				return new SalesManRegistersProcessor(registersList);
