@@ -9,13 +9,20 @@ public class SalesRegistry extends Registry{
 	public SalesRegistry(String saleId, List<ItemSale> itemsList, String salesManName) {
 		this.id = RegistersIds.ITEMSALE;
 		this.saleId = saleId;
-		this.ItemsList = itemsList;
+		this.itemsList = itemsList;
 		this.salesManName = salesManName;
 	}
 	
 	private String saleId;
-	private List<ItemSale> ItemsList;
+	private List<ItemSale> itemsList;
 	private String salesManName;
+	private double sellValueSum;
+	
+	public double getSellValuesSum() {
+		this.sellValueSum = 0.0;
+		itemsList.forEach((item) -> sellValueSum += item.getSaleValue());
+		return this.sellValueSum;
+	}
 	
 	public String getSaleId() {
 		return saleId;
@@ -24,10 +31,10 @@ public class SalesRegistry extends Registry{
 		this.saleId = saleId;
 	}
 	public List<ItemSale> getItemsList() {
-		return ItemsList;
+		return itemsList;
 	}
 	public void setItemsList(List<ItemSale> itemsList) {
-		ItemsList = itemsList;
+		this.itemsList = itemsList;
 	}
 	public String getSalesManName() {
 		return salesManName;
@@ -37,7 +44,7 @@ public class SalesRegistry extends Registry{
 	}
 	@Override
 	public String toString() {
-		return "SalesRegistry [saleId=" + saleId + ", ItemsList=" + ItemsList + ", salesManName=" + salesManName + "]";
+		return "SalesRegistry [saleId=" + saleId + ", itemsList=" + itemsList + ", salesManName=" + salesManName + "]";
 	}
 
 }
