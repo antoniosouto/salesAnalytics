@@ -57,7 +57,9 @@ public class SalesData {
 		}
 		
 		private static Registry createRegistry(String line) {
-			String [] tokens = line.split("�");
+			// Latin Small Letter c with cedilla
+			final String ccedilla = Character.toString('\u00E7');
+			String [] tokens = line.split(ccedilla);
 			if (tokens[0].equals(RegistersIds.SALESMAN.id())) {
 				return new SalesManRegistry(tokens[1], tokens[2], tokens[3]);
 			} else if (tokens[0].equals(RegistersIds.CLIENT.id())) {
