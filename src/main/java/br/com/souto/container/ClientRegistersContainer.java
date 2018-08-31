@@ -1,7 +1,15 @@
 package br.com.souto.container;
 
-public class ClientRegistersContainer implements RegistersContainer{
+import java.util.List;
+
+import br.com.souto.registry.Registry;
+
+public class ClientRegistersContainer extends RegistersContainer{
 	
+	public ClientRegistersContainer(List<Registry> registersList) {
+		super(registersList);
+	}
+
 	public String process() {
 		return "ClientRegisters";
 	}

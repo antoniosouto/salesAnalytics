@@ -25,18 +25,17 @@ public class SalesData {
 	
 		public List<RegistersContainer> getRegistersContainers() throws IOException {
 			
-			List<RegistersContainer> registersContaiersList = new ArrayList<RegistersContainer>();
+			List<RegistersContainer> registersContainersList = new ArrayList<RegistersContainer>();
 			
-			for (List<Registry> value: getRegisters().values()) {
-				
-				
+			for (List<Registry> registersList: getRegisters().values()) {
+				registersContainersList.add(createRegistersContainers(registersList));
 			}
 			
-			return null;
+			return registersContainersList;
 			
 		}
 
-		public Map<RegistersIds, List<Registry>> getRegisters() throws IOException {
+		private Map<RegistersIds, List<Registry>> getRegisters() throws IOException {
 			String fileName = "lines.txt";
 			List<String> registersList = new ArrayList<>();
 			registersList = Files.lines(Paths.get(fileName), StandardCharsets.UTF_8).collect(Collectors.toList());
@@ -89,11 +88,11 @@ public class SalesData {
 		private static RegistersContainer createRegistersContainers(List<Registry> registersList) {
 			switch(registersList.get(0).getId()) {
 			case SALESMAN:
-				return new SalesManRegistersContainer();
+				return new SalesManRegistersContainer(registersList);
 			case CLIENT:
-				return new ClientRegistersContainer();
+				return new ClientRegistersContainer(registersList);
 			case ITEMSALE:
-				return new SalesRegistersContainer();
+				return new SalesRegistersContainer(registersList);
 			default:
 				throw new IllegalStateException("Invalid State.");
 					

@@ -2,10 +2,8 @@ package br.com.souto;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
-import br.com.souto.registry.Registry;
-import br.com.souto.repository.RegistersIds;
+import br.com.souto.container.RegistersContainer;
 import br.com.souto.repository.SalesData;
 
 /*
@@ -13,10 +11,10 @@ import br.com.souto.repository.SalesData;
  */
 public class Analytics {
 	public static void main(String[] args) {
-		Map<RegistersIds, List<Registry>> registers;
+		List<RegistersContainer> registersContainers;
         try {
-			registers = new SalesData().getRegisters();
-			System.out.println(registers);
+			registersContainers = new SalesData().getRegistersContainers();
+			System.out.println(registersContainers);
 		} catch (IOException e) {
 			System.out.println("Erro ao ler arquivo de entrada");
 		}
