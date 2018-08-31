@@ -8,6 +8,10 @@ public class ItemSale {
 		this.price = price;
 	}
 	
+	public double getSaleValue() {
+		return this.quantity * this.price;
+	}
+	
 	private String id;
 	private Integer quantity;
 	private Double price;

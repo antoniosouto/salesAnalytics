@@ -11,7 +11,7 @@ public class ClientRegistersContainer extends RegistersContainer{
 	}
 
 	public String process() {
-		return "ClientRegisters";
+		return "Number of Clients: " + registersList.size();
 	}
 
 }

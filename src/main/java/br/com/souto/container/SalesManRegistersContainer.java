@@ -11,7 +11,7 @@ public class SalesManRegistersContainer extends RegistersContainer{
 	}
 
 	public String process() {
-		return "SalesManRegisters";
+		return "Number of Salesman: " + registersList.size();
 	}
 
 }
