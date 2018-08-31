@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,34 +24,43 @@ import br.com.souto.registry.SalesRegistry;
 
 public class SalesData {
 	
-		public List<RegistersContainer> getRegistersContainers() throws IOException {
+		public List<RegistersContainer> getRegistersContainers(List<String> registerLinesList) {
 			
 			List<RegistersContainer> registersContainersList = new ArrayList<RegistersContainer>();
 			
-			for (List<Registry> registersList: getRegisters().values()) {
+			for (List<Registry> registersList: getRegisters(registerLinesList).values()) {
 				registersContainersList.add(createRegistersContainers(registersList));
 			}
 			
 			return registersContainersList;
 			
 		}
+		
+		private static RegistersContainer createRegistersContainers(List<Registry> registersList) {
+			switch(registersList.get(0).getId()) {
+			case SALESMAN:
+				return new SalesManRegistersContainer(registersList);
+			case CLIENT:
+				return new ClientRegistersContainer(registersList);
+			case ITEMSALE:
+				return new SalesRegistersContainer(registersList);
+			default:
+				throw new IllegalStateException("Invalid State.");
+					
+			}
+		}
 
-		private Map<RegistersIds, List<Registry>> getRegisters() throws IOException {
-			String fileName = "lines.txt";
-			List<String> registersList = new ArrayList<>();
-			registersList = Files.lines(Paths.get(fileName), StandardCharsets.UTF_8).collect(Collectors.toList());
+		private Map<RegistersIds, List<Registry>> getRegisters(List<String> registerLinesList) {
 			
 			Map<RegistersIds, List<Registry>> registers= new HashMap<RegistersIds, List<Registry>>();
 			for (RegistersIds type: RegistersIds.values()) {
 				registers.put(type, new ArrayList<Registry>());
 			}
 			
-			for (String registerLine: registersList) {
+			for (String registerLine: registerLinesList) {
 				Registry registry = createRegistry(registerLine);
 				registers.get(registry.getId()).add(registry);
 			}
-			
-			System.out.println(registers);
 			
 			return registers;
 		}
@@ -70,7 +80,8 @@ public class SalesData {
 			}
 		}
 		
-		private static SalesRegistry createSalesRegistry(String saleId, String itemsList, String salesManName) {
+		private static SalesRegistry createSalesRegistry(String saleId,
+				String itemsList,String salesManName) {
 			
 			List <ItemSale> itemSales = new ArrayList<ItemSale>();
 			String [] items = itemsList.substring(1, itemsList.length()-1).split(",");
@@ -83,20 +94,6 @@ public class SalesData {
 			}
 			
 			return new SalesRegistry(saleId, itemSales, salesManName);
-		}
-		
-		private static RegistersContainer createRegistersContainers(List<Registry> registersList) {
-			switch(registersList.get(0).getId()) {
-			case SALESMAN:
-				return new SalesManRegistersContainer(registersList);
-			case CLIENT:
-				return new ClientRegistersContainer(registersList);
-			case ITEMSALE:
-				return new SalesRegistersContainer(registersList);
-			default:
-				throw new IllegalStateException("Invalid State.");
-					
-			}
 		}
 
 }
