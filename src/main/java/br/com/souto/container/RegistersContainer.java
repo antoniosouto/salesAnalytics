@@ -16,7 +16,7 @@ public abstract class RegistersContainer {
 
 	@Override
 	public String toString() {
-		return "RegistersContainer [registersList=" + registersList + "]";
+		return this.getClass().getSimpleName() + " [registersList=" + registersList + "]";
 	}
 	
 
