@@ -3,6 +3,7 @@ package br.com.souto;
 import java.io.IOException;
 import java.util.List;
 
+import br.com.souto.analytics.SalesAnalysis;
 import br.com.souto.container.RegistersContainer;
 import br.com.souto.repository.SalesData;
 
@@ -11,10 +12,12 @@ import br.com.souto.repository.SalesData;
  */
 public class Analytics {
 	public static void main(String[] args) {
-		List<RegistersContainer> registersContainers;
+		List<RegistersContainer> registersContainersList;
         try {
-			registersContainers = new SalesData().getRegistersContainers();
-			System.out.println(registersContainers);
+			registersContainersList = new SalesData().getRegistersContainers();
+			System.out.println(registersContainersList);
+			System.out.println(new SalesAnalysis().process(registersContainersList));
+			registersContainersList.forEach((registerContainer) -> System.out.println(registerContainer.process()));
 		} catch (IOException e) {
 			System.out.println("Erro ao ler arquivo de entrada");
 		}
