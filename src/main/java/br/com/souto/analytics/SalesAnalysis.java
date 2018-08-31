@@ -1,6 +1,6 @@
 package br.com.souto.analytics;
 
-import br.com.souto.model.Registry;
+import br.com.souto.registry.Registry;
 
 public class SalesAnalysis {
 	

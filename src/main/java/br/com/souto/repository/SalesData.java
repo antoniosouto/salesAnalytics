@@ -11,26 +11,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import br.com.souto.analytics.ClientRegisters;
-import br.com.souto.analytics.Registers;
-import br.com.souto.analytics.SalesManRegisters;
-import br.com.souto.analytics.SalesRegisters;
-import br.com.souto.model.ClientRegistry;
-import br.com.souto.model.ItemSale;
-import br.com.souto.model.Registry;
-import br.com.souto.model.SalesManRegistry;
-import br.com.souto.model.SalesRegistry;
+import br.com.souto.container.ClientRegistersContainer;
+import br.com.souto.container.RegistersContainer;
+import br.com.souto.container.SalesManRegistersContainer;
+import br.com.souto.container.SalesRegistersContainer;
+import br.com.souto.registry.ClientRegistry;
+import br.com.souto.registry.ItemSale;
+import br.com.souto.registry.Registry;
+import br.com.souto.registry.SalesManRegistry;
+import br.com.souto.registry.SalesRegistry;
 
 public class SalesData {
 	
-		public List<Registers> getRegistersContainers() throws IOException {
+		public List<RegistersContainer> getRegistersContainers() throws IOException {
 			
-			List<Registers> registersContaiersList = new ArrayList<Registers>();
+			List<RegistersContainer> registersContaiersList = new ArrayList<RegistersContainer>();
 			
 			for (List<Registry> value: getRegisters().values()) {
 				
 				
 			}
+			
+			return null;
 			
 		}
 
@@ -82,14 +84,14 @@ public class SalesData {
 			return new SalesRegistry(saleId, itemSales, salesManName);
 		}
 		
-		private static Registers createRegistersContainers(List<Registry> registersList) {
+		private static RegistersContainer createRegistersContainers(List<Registry> registersList) {
 			switch(registersList.get(0).getId()) {
 			case SALESMAN:
-				return new SalesManRegisters();
+				return new SalesManRegistersContainer();
 			case CLIENT:
-				return new ClientRegisters();
+				return new ClientRegistersContainer();
 			case ITEMSALE:
-				return new SalesRegisters();
+				return new SalesRegistersContainer();
 			default:
 				throw new IllegalStateException("Invalid State.");
 					

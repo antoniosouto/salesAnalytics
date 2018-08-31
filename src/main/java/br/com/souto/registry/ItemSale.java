@@ -1,4 +1,4 @@
-package br.com.souto.model;
+package br.com.souto.registry;
 
 public class ItemSale {
 	

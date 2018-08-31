@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import br.com.souto.model.Registry;
+import br.com.souto.registry.Registry;
 import br.com.souto.repository.RegistersIds;
 import br.com.souto.repository.SalesData;
 
