@@ -44,7 +44,8 @@ public class Analytics {
 							
 							Repository.saveReport(report, SalesFiles.getOutputFilePath(path));
 								
-						} catch (IndexOutOfBoundsException | NumberFormatException e) {
+						} catch (IndexOutOfBoundsException e) {
+								e.printStackTrace();
 								logger.log(Level.SEVERE, "Invalid data in input file.");
 						} catch (IllegalArgumentException e) {
 								System.out.println(e.getMessage());

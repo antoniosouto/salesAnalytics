@@ -62,14 +62,23 @@ public class SalesData {
 			// Latin Small Letter c with cedilla
 			final String ccedilla = Character.toString('\u00E7');
 			String [] tokens = line.split(ccedilla);
-			if (tokens[0].equals(RegistersIds.SALESMAN.id())) {
-				return new SalesManRegistry(tokens[1], tokens[2], tokens[3]);
-			} else if (tokens[0].equals(RegistersIds.CLIENT.id())) {
-				return new ClientRegistry(tokens[1], tokens[2], tokens[3]);
-			} else if (tokens[0].equals(RegistersIds.ITEMSALE.id())) {
-				return createSalesRegistry(tokens[1], tokens[2], tokens[3]);
+			try {
+				return new SalesManRegistry(line);
+			} catch (IllegalArgumentException e) {
+				try {
+					return new ClientRegistry(line);
+				} catch (IllegalArgumentException e2) {
+						return createSalesRegistry(line);
+				}
+			}
+		}
+		
+		private static SalesRegistry createSalesRegistry(String line) {
+			if (!SalesRegistry.validateInputLine(line)) {
+				throw  new IllegalArgumentException("Invalid input line: " + line);
 			} else {
-				throw new IllegalArgumentException("Invalid Id on line: " + line);
+				String [] tokens = line.split("\u00E7");
+				return createSalesRegistry(tokens[1], tokens[2], tokens[3]);
 			}
 		}
 		

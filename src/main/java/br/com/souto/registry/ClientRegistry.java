@@ -11,6 +11,18 @@ public class ClientRegistry extends Registry {
 		this.businessArea = businessArea;
 	}
 	
+	public ClientRegistry(String line) {
+		if (!validateInputLine(line)) {
+			throw  new IllegalArgumentException("Invalid input line: " + line);
+		} else {
+			String [] tokens = line.split("\u00E7");
+			this.id = RegistersIds.CLIENT;
+			this.cnpj = tokens[1];
+			this.name = tokens[2];
+			this.businessArea = tokens[3];
+		}
+	}
+	
 	private String cnpj;
 	private String name;
 	private String businessArea;
@@ -36,6 +48,10 @@ public class ClientRegistry extends Registry {
 	@Override
 	public String toString() {
 		return "ClientRegistry [cnpj=" + cnpj + ", name=" + name + ", businessArea=" + businessArea + "]";
+	}
+	
+	public static boolean validateInputLine(String line) {
+		return line.matches(RegistersIds.CLIENT.id() + "\u00E7[0-9]{16}\u00E7[a-zA-z ]+\u00E7[a-zA-z ]+");
 	}
 
 }

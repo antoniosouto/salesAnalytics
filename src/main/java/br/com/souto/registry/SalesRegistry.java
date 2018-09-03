@@ -47,4 +47,11 @@ public class SalesRegistry extends Registry{
 		return "SalesRegistry [saleId=" + saleId + ", itemsList=" + itemsList + ", salesManName=" + salesManName + "]";
 	}
 
+	public static boolean validateInputLine(String line) {
+		return line.matches(RegistersIds.ITEMSALE.id() + "\u00E7[0-9]+\u00E7\\["
+				+ "([0-9]+-[0-9]+-[0-9]+(\\.[0-9][0-9])?,)*"
+				+ "([0-9]+-[0-9]+-[0-9]+(\\.[0-9][0-9])?)"
+				+ "\\]\u00E7[a-zA-z ]+");
+	}
+
 }
