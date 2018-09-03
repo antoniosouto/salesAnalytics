@@ -60,8 +60,6 @@ public class SalesData {
 		
 		private static Registry createRegistry(String line) {
 			// Latin Small Letter c with cedilla
-			final String ccedilla = Character.toString('\u00E7');
-			String [] tokens = line.split(ccedilla);
 			try {
 				return new SalesManRegistry(line);
 			} catch (IllegalArgumentException e) {
