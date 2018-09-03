@@ -29,15 +29,26 @@ public final class SalesFiles {
 	}
 	
 	public static Path getOutputFilePath(Path path) {	
-		return Paths.get(homePath + OUTPUT_PATH + "\\" + path.getFileName().toString().replace(".dat", ".done.dat"));
+		return Paths.get(homePath + OUTPUT_PATH + "/" + path.getFileName().toString().replace(".dat", ".done.dat"));
 	}
 	
 	private static String setHomePath() {
-		return System.getenv("HOMEPATH").isEmpty() ? System.getenv("HOME") : System.getenv("HOMEPATH");
+		
+		final String home = System.getenv("HOME");
+		final String homepath = System.getenv("HOMEPATH");
+		
+		if (homepath != null && !homepath.isEmpty()) {
+			return homepath;
+		} else if (home != null && !home.isEmpty()) {
+			return home;
+		} else {
+			return ".";
+		}
+		
 	}
 
 	private static String homePath = setHomePath();
-	private static final String INPUT_PATH = "\\data\\in";
-	private static final String OUTPUT_PATH = "\\data\\out";
+	private static final String INPUT_PATH = "/data/in";
+	private static final String OUTPUT_PATH = "/data/out";
 
 }
