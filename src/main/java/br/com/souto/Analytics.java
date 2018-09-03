@@ -57,8 +57,8 @@ public class Analytics {
 					logger.log(Level.SEVERE, "File read/write error: " + e.getMessage());
 				}
 			}};
-			final ScheduledFuture<?> reportsGeneratorHandler =
-		            scheduler.scheduleAtFixedRate(reportsGenerator, 10, 10, TimeUnit.SECONDS);
+			
+			scheduler.scheduleAtFixedRate(reportsGenerator, 10, 10, TimeUnit.SECONDS);
 			
 		}
 	

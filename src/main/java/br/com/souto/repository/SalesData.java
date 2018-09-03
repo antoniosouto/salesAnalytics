@@ -10,7 +10,6 @@ import br.com.souto.processor.RegistersProcessor;
 import br.com.souto.processor.SalesManRegistersProcessor;
 import br.com.souto.processor.SalesRegistersProcessor;
 import br.com.souto.registry.ClientRegistry;
-import br.com.souto.registry.ItemSale;
 import br.com.souto.registry.Registry;
 import br.com.souto.registry.SalesManRegistry;
 import br.com.souto.registry.SalesRegistry;
@@ -66,35 +65,9 @@ public class SalesData {
 				try {
 					return new ClientRegistry(line);
 				} catch (IllegalArgumentException e2) {
-						return createSalesRegistry(line);
+						return SalesRegistry.createSalesRegistry(line);
 				}
 			}
 		}
-		
-		private static SalesRegistry createSalesRegistry(String line) {
-			if (!SalesRegistry.validateInputLine(line)) {
-				throw  new IllegalArgumentException("Invalid input line: " + line);
-			} else {
-				String [] tokens = line.split("\u00E7");
-				return createSalesRegistry(tokens[1], tokens[2], tokens[3]);
-			}
-		}
-		
-		private static SalesRegistry createSalesRegistry(String saleId,
-				String itemsList,String salesManName) {
-			
-			List <ItemSale> itemSales = new ArrayList<ItemSale>();
-			String [] items = itemsList.substring(1, itemsList.length()-1).split(",");
-			
-			for (String item: items) {
-				String [] itemFields = item.split("-");
-				itemSales.add(new ItemSale(itemFields[0],
-						Integer.parseInt(itemFields[1]),
-						Double.valueOf(itemFields[2])));
-			}
-			
-			return new SalesRegistry(saleId, itemSales, salesManName);
-		}
-
 }
 
