@@ -1,5 +1,7 @@
 package br.com.souto.registry;
 
+import java.util.List;
+
 import br.com.souto.repository.RegistersIds;
 
 public class Registry {
@@ -12,6 +14,10 @@ public class Registry {
 
 	public void setId(RegistersIds id) {
 		this.id = id;
+	}
+
+	public String process(List<Registry> registersList) {
+		return "";
 	}
 
 }

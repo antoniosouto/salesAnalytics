@@ -1,20 +1,18 @@
 package br.com.souto;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import br.com.souto.analytics.SalesAnalysis;
 import br.com.souto.files.SalesFiles;
-import br.com.souto.processor.RegistersProcessor;
 import br.com.souto.repository.Repository;
 import br.com.souto.repository.SalesData;
-import java.nio.file.Path;
 
 public class Analytics {
 	
@@ -24,7 +22,6 @@ public class Analytics {
 	final Logger logger = Logger.getLogger(this.getClass().getName());
 	
 	public void generateReportsJob() {
-
 		final Runnable reportsGenerator = new Runnable() {
 			public void run() {
 				logger.info("\nStarting Job...");
@@ -33,20 +30,13 @@ public class Analytics {
 						try {
 							
 							logger.info("Processing file " + path.toString());
-								
+		
 							List<String> registerLinesList = Repository.getRegisterLinesList(path);
-							List<RegistersProcessor> registersProcessorsList =
-									new SalesData().getRegistersProcessors(registerLinesList);
-							
-							logger.fine(registersProcessorsList.toString());
-							
-							String report = new SalesAnalysis().process(registersProcessorsList);
+
+							String report = new SalesAnalysis().process(SalesData.getRegisters(registerLinesList).values());
 							
 							Repository.saveReport(report, SalesFiles.getOutputFilePath(path));
 								
-						} catch (IndexOutOfBoundsException e) {
-								e.printStackTrace();
-								logger.log(Level.SEVERE, "Invalid data in input file.");
 						} catch (IllegalArgumentException e) {
 								System.out.println(e.getMessage());
 						} catch (IOException e) {

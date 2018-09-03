@@ -7,17 +7,16 @@ import br.com.souto.repository.RegistersIds;
 
 public class SalesRegistry extends Registry{
 	
+	private String saleId;
+	private List<ItemSale> itemsList;
+	private String salesManName;
+	private double sellValueSum;
+	
 	public SalesRegistry(String saleId, List<ItemSale> itemsList, String salesManName) {
-		this.id = RegistersIds.ITEMSALE;
+		this.id = RegistersIds.SALE;
 		this.saleId = saleId;
 		this.itemsList = itemsList;
 		this.salesManName = salesManName;
-	}
-	
-	public double getSellValuesSum() {
-		this.sellValueSum = 0.0;
-		itemsList.forEach((item) -> sellValueSum += item.getSaleValue());
-		return this.sellValueSum;
 	}
 	
 	public static SalesRegistry createSalesRegistry(String line) {
@@ -45,23 +44,46 @@ public class SalesRegistry extends Registry{
 		return new SalesRegistry(saleId, itemSales, salesManName);
 	}
 
-	private String saleId;
-	private List<ItemSale> itemsList;
-	private String salesManName;
-	private double sellValueSum;
+	public double getSellValuesSum() {
+		this.sellValueSum = 0.0;
+		itemsList.forEach((item) -> sellValueSum += item.getSaleValue());
+		return this.sellValueSum;
+	}
 	
-	public String getSaleId() {
-		return saleId;
+	public String process(List<Registry> registersList) {
+		return "Highest value sell ID: " +  getHighestValueSellId(registersList) + "\n" 
+				+ "Worst SalesMan: " + getWorstSalesManName(registersList);
 	}
-	public void setSaleId(String saleId) {
-		this.saleId = saleId;
+	
+	private String getHighestValueSellId(List<Registry> registersList) {
+		String highestValueSellId = "";
+		double highestValueSellValue = 0.0;
+		for (Registry salesRegistry : registersList) {
+			for (ItemSale itemSale :  ((SalesRegistry) salesRegistry).getItemsList()) {
+				if (itemSale.getSaleValue() > highestValueSellValue) {
+					highestValueSellId = itemSale.getId();
+					highestValueSellValue = itemSale.getSaleValue();
+				}
+			}
+		}
+		return highestValueSellId;
 	}
+	
+	private String getWorstSalesManName(List<Registry> registersList) {
+		String worstSalesManName = new String();
+		double lowestValueSellValue = 10000000000.0;
+		for (Registry salesRegistry : registersList) {
+			if (((SalesRegistry) salesRegistry).getSellValuesSum() < lowestValueSellValue) {
+				worstSalesManName = ((SalesRegistry) salesRegistry).getSalesManName();
+			}
+		}
+		return worstSalesManName;
+	}
+	
 	public List<ItemSale> getItemsList() {
 		return itemsList;
 	}
-	public void setItemsList(List<ItemSale> itemsList) {
-		this.itemsList = itemsList;
-	}
+
 	public String getSalesManName() {
 		return salesManName;
 	}
@@ -74,7 +96,7 @@ public class SalesRegistry extends Registry{
 	}
 
 	public static boolean validateInputLine(String line) {
-		return line.matches(RegistersIds.ITEMSALE.id() + "\u00E7[0-9]+\u00E7\\["
+		return line.matches(RegistersIds.SALE.id() + "\u00E7[0-9]+\u00E7\\["
 				+ "([0-9]+-[0-9]+-[0-9]+(\\.[0-9][0-9])?,)*"
 				+ "([0-9]+-[0-9]+-[0-9]+(\\.[0-9][0-9])?)"
 				+ "\\]\u00E7[a-zA-z ]+");

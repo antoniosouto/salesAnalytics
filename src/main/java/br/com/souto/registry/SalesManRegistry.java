@@ -1,8 +1,14 @@
 package br.com.souto.registry;
 
+import java.util.List;
+
 import br.com.souto.repository.RegistersIds;
 
 public class SalesManRegistry extends Registry {
+
+	private String cpf;
+	private String name;
+	private String sales;
 	
 	public SalesManRegistry(String cpf, String name, String sales) {
 		this.id = RegistersIds.SALESMAN;
@@ -27,10 +33,10 @@ public class SalesManRegistry extends Registry {
 		return line.matches(RegistersIds.SALESMAN.id() + "\u00E7[0-9]{13}\u00E7[a-zA-z ]+\u00E7[0-9]+(\\.[0-9][0-9])?");
 	}
 	
-	private String cpf;
-	private String name;
-	private String sales;
-	
+	public String process(List<Registry> registersList) {
+		return "Number of Salesman: " + registersList.size();
+	}
+
 	public String getCpf() {
 		return cpf;
 	}

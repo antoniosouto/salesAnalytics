@@ -26,7 +26,7 @@ public class SalesManRegistryTest {
 		assertFalse(SalesManRegistry.validateInputLine(RegistersIds.SALESMAN.id() + "\u00E7123.456.789/1234\u00E7Antonio Souto\u00E79456.30"));
 		
 		assertFalse(SalesManRegistry.validateInputLine(RegistersIds.CLIENT.id() + "\u00E71234567891234\u00E7Antonio Souto\u00E79456.30"));
-		assertFalse(SalesManRegistry.validateInputLine(RegistersIds.ITEMSALE.id() + "\u00E71234567891234\u00E7Antonio Souto\u00E79456.30"));
+		assertFalse(SalesManRegistry.validateInputLine(RegistersIds.SALE.id() + "\u00E71234567891234\u00E7Antonio Souto\u00E79456.30"));
 		assertFalse(SalesManRegistry.validateInputLine("\u00E71234567891234\u00E7Antonio Souto\u00E79456.30"));
 		
 		assertFalse(SalesManRegistry.validateInputLine(RegistersIds.SALESMAN.id() + "\u00E71234567891234\u00E7Name"));

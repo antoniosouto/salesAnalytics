@@ -3,7 +3,7 @@ package br.com.souto.repository;
 public enum RegistersIds {
 	SALESMAN ("001"),
 	CLIENT ("002"),
-	ITEMSALE ("003");
+	SALE ("003");
 	
 	private final String registerId;
 	

@@ -20,7 +20,7 @@ public class ClientRegistryTest {
 		assertFalse(ClientRegistry.validateInputLine(RegistersIds.CLIENT.id() + "\u00E712.345.678.91/1000\u00E7Antonio Souto\u00E7Urbano"));
 		
 		assertFalse(ClientRegistry.validateInputLine(RegistersIds.SALESMAN.id() + "\u00E71234567891234567\u00E7Antonio Souto\u00E7Rural"));
-		assertFalse(ClientRegistry.validateInputLine(RegistersIds.ITEMSALE.id() + "\u00E71234567891234567\u00E7Antonio Souto\u00E7Rural"));
+		assertFalse(ClientRegistry.validateInputLine(RegistersIds.SALE.id() + "\u00E71234567891234567\u00E7Antonio Souto\u00E7Rural"));
 		assertFalse(ClientRegistry.validateInputLine("\u00E71234567891234567\u00E7Antonio Souto\u00E7Rural"));
 		
 		assertFalse(ClientRegistry.validateInputLine(RegistersIds.CLIENT.id() + "\u00E71234567891234567\u00E7Name"));

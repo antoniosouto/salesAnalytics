@@ -1,9 +1,15 @@
 package br.com.souto.registry;
 
+import java.util.List;
+
 import br.com.souto.repository.RegistersIds;
 
 public class ClientRegistry extends Registry {
-	
+
+	private String cnpj;
+	private String name;
+	private String businessArea;
+
 	public ClientRegistry(String cnpj, String name, String businessArea) {
 		this.id = RegistersIds.CLIENT;
 		this.cnpj = cnpj;
@@ -23,35 +29,17 @@ public class ClientRegistry extends Registry {
 		}
 	}
 	
-	private String cnpj;
-	private String name;
-	private String businessArea;
+	public static boolean validateInputLine(String line) {
+		return line.matches(RegistersIds.CLIENT.id() + "\u00E7[0-9]{16}\u00E7[a-zA-z ]+\u00E7[a-zA-z ]+");
+	}
 	
-	public String getCnpj() {
-		return cnpj;
+	public String process(List<Registry> registersList) {
+		return "Number of Clients: " + registersList.size();
 	}
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getBusinessArea() {
-		return businessArea;
-	}
-	public void setBusinessArea(String businessArea) {
-		this.businessArea = businessArea;
-	}
+	
 	@Override
 	public String toString() {
 		return "ClientRegistry [cnpj=" + cnpj + ", name=" + name + ", businessArea=" + businessArea + "]";
 	}
 	
-	public static boolean validateInputLine(String line) {
-		return line.matches(RegistersIds.CLIENT.id() + "\u00E7[0-9]{16}\u00E7[a-zA-z ]+\u00E7[a-zA-z ]+");
-	}
-
 }

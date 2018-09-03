@@ -11,6 +11,10 @@ import java.util.List;
 
 public final class SalesFiles {
 	
+	private static String homePath = setHomePath();
+	private static final String INPUT_PATH = "/data/in";
+	private static final String OUTPUT_PATH = "/data/out";
+	
 	public static void createDirs() throws IOException {
 		Files.createDirectories(Paths.get(homePath + INPUT_PATH));
 		Files.createDirectories(Paths.get(homePath + OUTPUT_PATH));
@@ -21,7 +25,6 @@ public final class SalesFiles {
 		DirectoryStream<Path> stream = Files.newDirectoryStream( dir, "*.dat" );
 		List<Path> pathList = new ArrayList<Path>();
 		for (Path path : stream) {
-		    //System.out.println( path.getFileName() );
 		    pathList.add(path);
 		}
 		stream.close();
@@ -44,11 +47,5 @@ public final class SalesFiles {
 		} else {
 			return ".";
 		}
-		
 	}
-
-	private static String homePath = setHomePath();
-	private static final String INPUT_PATH = "/data/in";
-	private static final String OUTPUT_PATH = "/data/out";
-
 }
