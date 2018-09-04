@@ -38,9 +38,11 @@ public class Analytics {
 							Repository.saveReport(report, SalesFiles.getOutputFilePath(path));
 								
 						} catch (IllegalArgumentException e) {
-								System.out.println(e.getMessage());
+							logger.log(Level.WARNING, e.getMessage());
 						} catch (IOException e) {
 							logger.log(Level.SEVERE, "File read/write error: " + e.getMessage());
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
 					}
 				} catch (IOException e) {

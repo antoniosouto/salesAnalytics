@@ -10,7 +10,6 @@ public class SalesAnalysis {
 	String reports = new String();
 	
 	public String process( Collection<List<Registry>>  registryListsMap) {
-		System.out.println(registryListsMap);
 		for (List<Registry> registersList : registryListsMap) {
 			if (registersList != null && registersList.size() > 0) {
 				/* Strategy Design Pattern
