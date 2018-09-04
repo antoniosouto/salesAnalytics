@@ -37,24 +37,6 @@ public class SalesManRegistry extends Registry {
 		return "Number of Salesman: " + registersList.size();
 	}
 
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getSales() {
-		return sales;
-	}
-	public void setSales(String sales) {
-		this.sales = sales;
-	}
 	@Override
 	public String toString() {
 		return "SalesManRegistry [cpf=" + cpf + ", name=" + name + ", sales=" + sales + "]";

@@ -87,9 +87,7 @@ public class SalesRegistry extends Registry{
 	public String getSalesManName() {
 		return salesManName;
 	}
-	public void setSalesManName(String salesManName) {
-		this.salesManName = salesManName;
-	}
+
 	@Override
 	public String toString() {
 		return "SalesRegistry [saleId=" + saleId + ", itemsList=" + itemsList + ", salesManName=" + salesManName + "]";
